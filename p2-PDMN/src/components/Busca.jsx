@@ -12,15 +12,10 @@ const Busca = () => {
 
     useEffect(() => {
         const fazerBusca = async () => {
-            const {data} = await axios.get('https://api.github.com/search/repositories?q=',{
-                params: {
-                    q:'nome',
-                    appid:'66482c8553c1fe2b6ed8a26c62c7ce0b',
-                    units:'metric',
-                    srsearch: termoDeBusca
-                }
+            const {data} = await axios.get('http://localhost:3000/search',{
+                params: { city: termoDeBusca }
             })
-            setResultados(data.q.search)
+            setResultados[(data)]
         }
         if (termoDeBusca && resultados.length >= 3) {
             fazerBusca()
@@ -46,22 +41,22 @@ const Busca = () => {
                     value={termoDeBusca} />
             </IconField> 
             {
-                resultados.map((resultado) => (
+                resultados.map((resultado,index) => (
                     <div 
-                        key={resultado.id}
+                        key={index}
                         className='border-bottom border border-1 border-400 p-2 text-center font-bold'>
                             <div>
-                                {resultado.title}
+                                {resultado.name}
                                 <span>
                                     <Button 
-                                        className='p-button-text p-button-plain'
+                                        className='p-button-text p-button-plain pi pi-external-link'
                                         onClick={() => {
-                                            window.open(resultado.html_url, '_blank')
+                                            window.open(`http://localhost:3000/detalhes?city=${resultado.name}`, '_blank')
                                         }}/>
                                 </span>
                             </div>
                             <div className='p-2'>
-                                {striptags (resultado.snippet)}
+                                {striptags(`Clima: ${resultado.weather[0].description}, Temperatura: ${resultado.main.temp}°C, Umidade: ${resultado.main.humidity}%`)}
                             </div>
                     </div>
                 ))
