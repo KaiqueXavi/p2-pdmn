@@ -15,7 +15,7 @@ const Busca = () => {
             const {data} = await axios.get('http://localhost:3000/search',{
                 params: { city: termoDeBusca }
             })
-            setResultados[(data)]
+            setResultados ([data])
         }
         if (termoDeBusca && resultados.length >= 3) {
             fazerBusca()
@@ -45,15 +45,8 @@ const Busca = () => {
                     <div 
                         key={index}
                         className='border-bottom border border-1 border-400 p-2 text-center font-bold'>
-                            <div>
+                            <div className='p-2'>
                                 {resultado.name}
-                                <span>
-                                    <Button 
-                                        className='p-button-text p-button-plain pi pi-external-link'
-                                        onClick={() => {
-                                            window.open(`http://localhost:3000/detalhes?city=${resultado.name}`, '_blank')
-                                        }}/>
-                                </span>
                             </div>
                             <div className='p-2'>
                                 {striptags(`Clima: ${resultado.weather[0].description}, Temperatura: ${resultado.main.temp}°C, Umidade: ${resultado.main.humidity}%`)}
