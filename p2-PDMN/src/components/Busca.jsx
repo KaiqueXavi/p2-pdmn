@@ -1,10 +1,10 @@
 import axios from 'axios'
-import striptags from 'striptags'
+//import striptags from 'striptags'
 import React,{ useState, useEffect} from 'react'
 import { IconField } from 'primereact/iconfield'
 import { InputIcon } from 'primereact/inputicon'
 import { InputText } from 'primereact/inputtext'
-
+import Exibicao from './Exibicao.jsx'
 
 const Busca = () => {
     const [termoDeBusca, setTermoDeBusca] = useState('São Paulo')
@@ -41,19 +41,10 @@ const Busca = () => {
                     value={termoDeBusca} />
             </IconField> 
             {
-                resultados.map((resultado,index) => (
-                    <div 
-                        key={index}
-                        className='border-bottom border border-1 border-400 p-2 text-center font-bold'>
-                            <div className='p-2'>
-                                {resultado.name}
-                            </div>
-                            <div className='p-2'>
-                                {striptags(`Clima: ${resultado.weather[0].description}, Temperatura: ${resultado.main.temp}°C, Umidade: ${resultado.main.humidity}%`)}
-                            </div>
-                    </div>
+                resultados.map((resultado, index) => (
+                <Exibicao key={index} dados={resultado} />
                 ))
-            }
+             }
         </div>
     )
 }
