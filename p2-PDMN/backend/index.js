@@ -21,15 +21,6 @@ app.get('/search', async (req, res) => {
                 lang: 'pt_br'
             }
         })
-
-            const data = {
-            ...result.data,
-            weather: result.data.weather.map(w => ({
-                ...w,
-                icon_url: `https://openweathermap.org/img/wn/${w.icon}@2x.png`
-            }))
-        }
-
         res.json(result.data)
     } catch (err) {
         console.error(err.message)
