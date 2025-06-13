@@ -24,7 +24,6 @@ app.get('/search', async (req, res) => {
         res.json(result.data)
     } catch (err) {
         console.error(err.message)
-        res.status(500).json({ error: 'Erro ao buscar dados do clima' })
     }
 })
 

@@ -16,6 +16,9 @@ const Exibicao = ({ dados }) => {
                     {name}
                 </div>
                 <img src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`} alt={weather[0].description} style={{ width: '200px', height: '200px' }}/>
+                <div>
+                    {striptags(`${weather[0].description}`)}
+                </div>
                 <div className="p-2">
                     {striptags(`Temperatura atual: ${main.temp}°C Umidade: ${main.humidity}%`)}
                 </div>
